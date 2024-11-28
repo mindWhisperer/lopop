@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <title>Pridat</title>
+    <title>Pridt</title>
     @include('partials/head')
 </head>
 <body>
