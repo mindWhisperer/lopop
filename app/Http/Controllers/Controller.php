@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Providers\BookServiceProvider;
+use App\Providers\GenreServiceProvider;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -16,6 +17,7 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->bookService = new BookServiceProvider();
+        $this->genreService = new GenreServiceProvider();
     }
 
     public function index():View
@@ -34,6 +36,12 @@ class Controller extends BaseController
     {
         $allBooks = $this->bookService->readAll();
         return view('stalice', ['books' => $allBooks]);
+    }
+
+    public function pridat()
+    {
+        $genreList = $this->genreService->readAll();
+        return view('pridat', ['genreList' => $genreList]);
     }
 
 }
