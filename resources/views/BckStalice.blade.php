@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
+    <title>Stalice</title>
     @include('partials/head')
 </head>
 <body>
