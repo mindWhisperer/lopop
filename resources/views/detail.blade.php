@@ -13,6 +13,7 @@
 
             <div class="col-lg-6 textos">
                 <button type="button" class="btn btn-outline-dark">Vymazať</button>
+                <a href="/uprava" class="btn btn-outline-secondary">Upraviť</a>
                 <h2>{{$book->nazov}}</h2>
                 <p>
                     {{$book->popis}}

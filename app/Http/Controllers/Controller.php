@@ -43,4 +43,10 @@ class Controller extends BaseController
         $genreList = $this->genreService->readAll();
         return view('pridat', ['genreList' => $genreList]);
     }
+
+    public function uprava()
+    {
+        $genreList = $this->genreService->readAll();
+        return view('uprava', ['genreList' => $genreList]);
+    }
 }
