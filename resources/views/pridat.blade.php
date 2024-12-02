@@ -13,17 +13,6 @@
     <div class="riadok formular  cal-12">
         <form class="row g-3">
             <div class="col-md-12">
-                <h4>Informácie o registrovanom užívateľovi</h4>
-                <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4">
-                </div>
-            </div>
-            <div class="col-md-12">
                 <h4>Informácie o knihe</h4>
                 <div class="col-12">
                     <label class="form-label">Názov knihy <br>
@@ -40,25 +29,47 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Žáner</label> <br>
-                        <select class="form-select" id="book-genre">
-                            <option value="-1" selected>...</option>
-                            @foreach($genreList as $genre)
-                                <option value="{{$genre->id}}">{{$genre->zaner}}</option>
-                            @endforeach
-                        </select>
+                    <select class="form-select" id="book-genre">
+                        <option value="-1" selected>...</option>
+                        @foreach($genreList as $genre)
+                            <option value="{{$genre->id}}">{{$genre->zaner}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Súhlasím s pravidlami
-                    </label>
+
+            {{-- IS_NOT_REGISTERED OR IS_NOT_LOGGED --}}
+            @if(true)
+
+                <div class="col-md-12">
+                    <h4>Informácie o registrovanom užívateľovi</h4>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="inputPassword4">
+                    </div>
                 </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Pridať položku</button>
-            </div>
+
+            @endif
+
+            {{-- IS_NOT_LOGGED --}}
+            @if(true)
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Súhlasím s pravidlami
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary">Pridať položku</button>
+                </div>
+            @endif
         </form>
     </div>
 </main>
@@ -84,7 +95,6 @@
         /** @type {HTMLInputElement} */
         const consent = form.querySelector('#rules-consent');
 
-
         /**
          * @param {string} [message]
          */
@@ -94,10 +104,10 @@
 
         /**
          * @param {string} userEmail
-         * @param {string} passwrod
+         * @param {string} password
          * @returns {boolean}
          */
-        const passwordChecker = (userEmail, passwrod) => {
+        const passwordChecker = (userEmail, password) => {
             // @todo Dorobiť Ajax volanie pre overenie hesla
             const request = fetch('').then(result => result.json());
             return true;

@@ -13,7 +13,7 @@
         <div class="riadok">
             <div class="col-lg-6 textos">
                 <button type="button" class="btn btn-outline-danger">Novinka</button>
-                <a href="/detail/{{$book->id}}" class="btn btn-outline-secondary">Čítať</a>
+                <a href="{{route('detail', ['id' => $book->id])}}" class="btn btn-outline-secondary">Čítať</a>
                 <h2>{{$book->nazov}}</h2>
                 <p>
                     {{\Illuminate\Support\Str::limit($book->popis, 190, '...')}}

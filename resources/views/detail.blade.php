@@ -9,22 +9,25 @@
     @include('partials/menu')
 </header>
 <main>
-        <div class="riadok">
+    <div class="riadok">
 
-            <div class="col-lg-6 textos">
+        <div class="col-lg-6 textos">
+            {{-- IS_ADMIN --}}
+            @if(true)
                 <button type="button" class="btn btn-outline-dark">Vymazať</button>
-                <a href="/uprava" class="btn btn-outline-secondary">Upraviť</a>
-                <h2>{{$book->nazov}}</h2>
-                <p>
-                    {{$book->popis}}
-                </p>
-
-            </div>
-            <div class="col-lg-6 obrazok">
-                <img src={{$book->obrazok}} alt="c">
-            </div>
+                <a href="{{route('edit-book', ['id' => $book->id])}}" class="btn btn-outline-secondary">Upraviť</a>
+            @endif
+            <h2>{{$book->nazov}}</h2>
+            <p>
+                {{$book->popis}}
+            </p>
 
         </div>
+        <div class="col-lg-6 obrazok">
+            <img src={{$book->obrazok}} alt="c">
+        </div>
+
+    </div>
 
 </main>
 

@@ -6,9 +6,9 @@ use App\Providers\BookServiceProvider;
 use App\Providers\GenreServiceProvider;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\View\View;
-class Controller extends BaseController
+
+class Controller
 {
     use AuthorizesRequests, ValidatesRequests;
 
@@ -20,7 +20,7 @@ class Controller extends BaseController
         $this->genreService = new GenreServiceProvider();
     }
 
-    public function index():View
+    public function index(): View
     {
         $newest = $this->bookService->lastThree();
         return view('index', ['books' => $newest]);
@@ -44,9 +44,10 @@ class Controller extends BaseController
         return view('pridat', ['genreList' => $genreList]);
     }
 
-    public function uprava()
+    public function uprava(int $id)
     {
         $genreList = $this->genreService->readAll();
-        return view('uprava', ['genreList' => $genreList]);
+        $book = $this->bookService->read($id);
+        return view('uprava', ['genreList' => $genreList, 'book' => $book]);
     }
 }

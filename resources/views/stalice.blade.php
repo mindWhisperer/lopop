@@ -18,7 +18,7 @@
                 <p class="card-text">{{\Illuminate\Support\Str::limit($book->popis, 190, '...')}}</p>
             </div>
             <div class="card-footer">
-                <a href="/detail/{{$book->id}}" class="btn btn-outline-secondary">Čítať</a>
+                <a href="{{route('detail', ['id' => $book->id])}}" class="btn btn-outline-secondary">Čítať</a>
             </div>
         </div>
     @endforeach
