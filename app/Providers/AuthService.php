@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -15,6 +17,11 @@ class AuthService
     public function __construct()
     {
         $this->key = env('JWT_SECRET');
+    }
+
+    function handle(Request $request, Closure $next) {
+        //print_r($request->headers);
+        //exit;
     }
 
     function getToken(array $payload): string

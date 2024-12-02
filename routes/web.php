@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EndpointController;
+use App\Providers\AuthService;
 use Illuminate\Support\Facades\Route;
 
 
@@ -11,8 +12,12 @@ Route::prefix('/')->controller(EndpointController::class)
         Route::get('detail/{id}', [Controller::class, 'detail'])->name('detail');
         Route::get('stalice', [Controller::class, 'stalice'])->name('best-of');
 
+        //Route::get('login', [Controller::class, 'stalice'])->name('best-of');
+        //Route::get('logout', [Controller::class, 'stalice'])->name('best-of');
+        //Route::get('register', [Controller::class, 'stalice'])->name('best-of');
+
         Route::prefix('panel')->controller(EndpointController::class)
-            //->middleware('auth')
+            //->middleware([AuthService::class])
             ->group(function () {
                 Route::get('pridat', [Controller::class, 'pridat'])->name('add-book');
                 Route::get('uprava/{id}', [Controller::class, 'uprava'])
