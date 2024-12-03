@@ -7,7 +7,7 @@
         @foreach($books as $book)
             <div class="riadok">
                 <div class="col-lg-6 textos">
-                    <button type="button" class="btn btn-outline-danger">Novinka</button>
+                    <div class="btn">Novinka</div>
                     <a href="{{route('detail', ['id' => $book->id])}}" class="btn btn-outline-secondary">Čítať</a>
                     <h2>{{$book->name}}</h2>
                     <p>
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="col-lg-6 obrazok">
-                    <img src={{$book->image}} alt="c">
+                    <img src="{{$book->image}}" alt="c">
                 </div>
             </div>
         @endforeach

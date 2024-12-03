@@ -16,26 +16,27 @@ class AuthService
 
     public function __construct()
     {
-        $this->key = env('JWT_SECRET');
+        $this->key = env('JWT_SECRET', env('APP_KEY', 'U8grDuf4DPnRlWK6xIr7qRi7pzeya0Tj-GFOZft7EBI'));
     }
 
-    function handle(Request $request, Closure $next)
-    {
-        $response = $next($request);
-        return $response;
-    }
-
-    function getToken(array $payload): string
+    function createToken(array $payload, int $ttl = 3600): string
     {
         return JWT::encode(
-            payload: $payload,
+            payload: array_merge($payload, ["ttl" => time() + $ttl]),
             key: $this->key,
             alg: self::algo,
         );
     }
 
-    function validateToken(string $token, &$data): bool
+    function getTokenData(string $token): array|null
     {
+        $this->validateToken(token: $token, data: $decoded);
+        return json_decode(json_encode($decoded), true) ?? [];
+    }
+
+    function validateToken(string $token, &$data = null): bool
+    {
+        //$token = $this->parseTokenBearer($token);
         try {
             $data = JWT::decode($token, new Key(
                 keyMaterial: $this->key,
@@ -47,10 +48,9 @@ class AuthService
         return true;
     }
 
-    function getTokenData(string $token): array|null
+    private function parseTokenBearer(string $rawToken): string
     {
-        $this->validateToken(token: $token, data: $decoded);
-        return json_decode(json_encode($decoded), true) ?? [];
+        return substr($rawToken, strlen('Bearer '));
     }
 
     function createPassword(string $password): string
@@ -58,7 +58,7 @@ class AuthService
         return Hash::make(value: $password);
     }
 
-    function validatePassword(string $password, $hashedPassword): bool
+    function validatePassword(string $password, string $hashedPassword): bool
     {
         return Hash::check(value: $password, hashedValue: $hashedPassword);
     }

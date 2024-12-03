@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('title', 'Stalice')
+@section('title', 'Stálice')
 
 @section('content')
     <main class="main-grid">

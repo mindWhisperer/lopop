@@ -7,8 +7,8 @@
         <div class="riadok">
 
             <div class="col-lg-6 textos">
-                {{-- IS_ADMIN --}}
-                @if(true)
+                {{-- IS_LOGGED --}}
+                @if(\App\Helpers\Roles::isLogged())
                     <button type="button" class="btn btn-outline-dark">Vymazať</button>
                     <a href="{{route('edit-book', ['id' => $book->id])}}" class="btn btn-outline-secondary">Upraviť</a>
                 @endif
@@ -19,7 +19,7 @@
 
             </div>
             <div class="col-lg-6 obrazok">
-                <img src={{$book->image}} alt="c">
+                <img src="{{$book->image}}" alt="c">
             </div>
 
         </div>

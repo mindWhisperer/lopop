@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Constants;
+use App\Providers\AuthService;
 use App\Providers\BookServiceProvider;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
 class EndpointController
 {
-    private BookServiceProvider $bookProvider;
+    private readonly BookServiceProvider $bookProvider;
+    private readonly \Illuminate\Database\Query\Builder $table;
 
     public function __construct()
     {
         $this->bookProvider = app(BookServiceProvider::class);
+        $this->table = DB::table('users');
     }
 
     public function getAll(): \Illuminate\Support\Collection|array
@@ -65,16 +70,78 @@ class EndpointController
         return [];
     }
 
-    public function login(string $email, string $password): array
+    public function login(Request $request)
     {
-        $success = $this->checkPassword(password: $password);
 
-        return [$email, $password, $success];
+        $data = $request->get('data');
+
+        $email = $data["email"];
+        $password = $data["password"];
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return [
+                "code" => 401,
+                "errors" => [['email', 'Nesprávny tvar prihlasovacieho emailu.']],
+                "success" => false,
+            ];
+        }
+        if (empty($password) || strlen($password) < 3) {
+            return [
+                "code" => 401,
+                "errors" => [['password', 'Heslo musí mať aspoň 3 znaky.']],
+                "success" => false,
+            ];
+        }
+
+        $user = $this->table->where('email', $email)->first();
+
+        if (!$user) {
+            return [
+                "code" => 401,
+                //"message" => "User not exist",
+                "errors" => [['login', 'Nesprávne prihlasovacie údaje']],
+                "success" => false,
+            ];
+        }
+
+        /** @type AuthService $auth */
+        $auth = app(AuthService::class);
+        if (!$auth->validatePassword($password, $user->password)) {
+            return [
+                "code" => 401,
+                "message" => "Invalid password",
+                "errors" => [['login', 'Nesprávne prihlasovacie údaje']],
+                "success" => false,
+            ];
+        }
+
+        $token = $auth->createToken([
+            "name" => $user->name,
+            "email" => $user->email,
+            //"role" => $user->role,
+            "role" => 9,
+        ]);
+
+        return response([
+            "code" => 200,
+            "message" => "Login success",
+            "success" => true,
+            Constants::AUTH_NAME => $token,
+        ], 200)
+            ->header('Content-Type', 'application/json')
+            // $name = null, $value = null, $minutes = 0, $path = null, $domain = null, $secure = null, $httpOnly = true, $raw = false, $sameSite = null
+            ->cookie(Constants::AUTH_NAME, $token, 3600, null, null, null,
+                false, // bolo potrebné vypnúť httpOnly aby sa dali čítať cookies pomocou JS
+                false, null);
     }
 
-    public function logout(): array
+    public function logout()
     {
-        return [];
+        return response([
+            "code" => 200,
+            "message" => "Logout success",
+            "success" => true,
+        ], 200)->cookie(Constants::AUTH_NAME, '', -1);
     }
 
     public function checkPassword(string $password): array
