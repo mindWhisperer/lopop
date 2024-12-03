@@ -4,7 +4,10 @@
         <div class="navbar-nav">
             <a class="nav-link" href="{{route('home')}}">Novinky</a>
             <a class="nav-link" href="{{route('best-of')}}">Stalice</a>
-            <a class="nav-link" href="{{route('add-book')}}">Pridať knihu</a>
+            {{-- IF_LOGGED --}}
+            @if(true)
+                <a class="nav-link" href="{{route('add-book')}}">Pridať knihu</a>
+            @endif
         </div>
     </div>
 </nav>

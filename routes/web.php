@@ -5,22 +5,22 @@ use App\Http\Controllers\EndpointController;
 use App\Providers\AuthService;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('/')->controller(EndpointController::class)
     ->group(function () {
         Route::get('/', [Controller::class, 'index'])->name('home');
         Route::get('detail/{id}', [Controller::class, 'detail'])->name('detail');
-        Route::get('stalice', [Controller::class, 'stalice'])->name('best-of');
+        Route::get('stalice', [Controller::class, 'bestOff'])->name('best-of');
 
-        //Route::get('login', [Controller::class, 'stalice'])->name('best-of');
-        //Route::get('logout', [Controller::class, 'stalice'])->name('best-of');
-        //Route::get('register', [Controller::class, 'stalice'])->name('best-of');
+        Route::get('login', [Controller::class, 'login'])->name('login');
+        Route::get('logout', [Controller::class, 'logout'])->name('logout');
+        Route::get('register', [Controller::class, 'register'])->name('register');
 
         Route::prefix('panel')->controller(EndpointController::class)
-            //->middleware([AuthService::class])
+            ->middleware([AuthService::class])
             ->group(function () {
-                Route::get('pridat', [Controller::class, 'pridat'])->name('add-book');
-                Route::get('uprava/{id}', [Controller::class, 'uprava'])
+                Route::get('profil', [Controller::class, 'profile'])->name('profile');
+                Route::get('pridat', [Controller::class, 'addBook'])->name('add-book');
+                Route::get('uprava/{id}', [Controller::class, 'editBook'])
                     ->where('id', '[0-9]+')
                     ->name('edit-book');
             });

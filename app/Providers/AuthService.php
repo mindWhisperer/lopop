@@ -19,9 +19,10 @@ class AuthService
         $this->key = env('JWT_SECRET');
     }
 
-    function handle(Request $request, Closure $next) {
-        //print_r($request->headers);
-        //exit;
+    function handle(Request $request, Closure $next)
+    {
+        $response = $next($request);
+        return $response;
     }
 
     function getToken(array $payload): string
@@ -48,7 +49,6 @@ class AuthService
 
     function getTokenData(string $token): array|null
     {
-
         $this->validateToken(token: $token, data: $decoded);
         return json_decode(json_encode($decoded), true) ?? [];
     }

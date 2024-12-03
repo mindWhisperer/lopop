@@ -13,6 +13,7 @@ class Controller
     use AuthorizesRequests, ValidatesRequests;
 
     private BookServiceProvider $bookService;
+    private GenreServiceProvider $genreService;
 
     public function __construct()
     {
@@ -23,31 +24,48 @@ class Controller
     public function index(): View
     {
         $newest = $this->bookService->lastThree();
-        return view('index', ['books' => $newest]);
+        return view('layouts.home', ['books' => $newest]);
     }
 
     public function detail($id)
     {
         $book = $this->bookService->read($id);
-        return view('detail', ['book' => $book]);
+        return view('layouts.detail', ['book' => $book]);
     }
 
-    public function stalice()
+    public function bestOff()
     {
         $allBooks = $this->bookService->readAll();
-        return view('stalice', ['books' => $allBooks]);
+        return view('layouts.bestoff', ['books' => $allBooks]);
     }
 
-    public function pridat()
+    public function addBook()
     {
         $genreList = $this->genreService->readAll();
-        return view('pridat', ['genreList' => $genreList]);
+        return view('layouts.panel.add', ['genreList' => $genreList]);
     }
 
-    public function uprava(int $id)
+    public function editBook(int $id)
     {
         $genreList = $this->genreService->readAll();
         $book = $this->bookService->read($id);
-        return view('uprava', ['genreList' => $genreList, 'book' => $book]);
+        return view('layouts.panel.edit', ['genreList' => $genreList, 'book' => $book]);
+    }
+
+
+    public function login()
+    {
+        return view('layouts.login');
+    }
+
+    public function logout()
+    {
+        // @todo Logout action
+        return redirect()->route('login');
+    }
+
+    public function register()
+    {
+        return view('layouts.register');
     }
 }
