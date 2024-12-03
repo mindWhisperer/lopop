@@ -13,6 +13,7 @@ class PanelMiddleware
         $token = $request->cookies->get(Constants::AUTH_NAME);
         /** @type AuthService $service */
         $service = app(AuthService::class);
+
         if (!$token || !$service->validateToken($token, $data) || $data?->ttl < time()) {
             return redirect()->route('login')->cookie(Constants::AUTH_NAME, '', -1);
         }

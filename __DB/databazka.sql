@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 03, 2024 at 11:12 AM
+-- Generation Time: Dec 03, 2024 at 08:42 PM
 -- Server version: 8.0.35
 -- PHP Version: 8.2.20
 
@@ -33,7 +33,7 @@ CREATE TABLE `books` (
   `genre` int NOT NULL,
   `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -48,10 +48,11 @@ INSERT INTO `books` (`id`, `name`, `genre`, `image`, `description`, `created_at`
 (5, 'Kevin', 7, 'https://plotpoint.sk/wp-content/uploads/2020/12/macaulay-culkin-sam-doma-696x392.webp', 'juchu', '2023-12-07 19:54:44', NULL),
 (6, 'Kevin', 11, 'https://plotpoint.sk/wp-content/uploads/2020/12/macaulay-culkin-sam-doma-696x392.webp', 'juchu', '2023-12-07 19:55:08', NULL),
 (7, 'Kevin', 2, 'https://images.twinkl.co.uk/tw1n/image/private/t_630_eco/image_repo/7d/a9/t-tp-2548603-ascending-and-descending-display-poster_ver_2.avif', 'juchu', '2023-12-07 19:56:03', NULL),
-(8, 'Emanuel Bacigala', 5, 'https://preview.redd.it/in-the-animated-movie-up-kevin-a-flightless-bird-changes-v0-lw0jq9kia6791.jpg?auto=webp&s=ae902419b8dfa92261c368bfd1eb25d68054f24d', 'Emanuel Bacigala z Popradu Vyfasoval karbobrúsku zo skladu. Tú starú Boshku karbošku poškodenú trošku, A poďho rezať zo železa ohradu. Už si dneska minul štyri kotúče, Čo s tým robíš, Bacigala, do púče?! A včera flexku Narexku, ná kdes to videl, v Tescu? Však vedúci ťa s vodováhou utlče! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Vysvetlujte zdrogovanej mládeži, Že sa im nenačíta brúsny kotúč na veži. Sa tu s tým prdkáš a trtkáš, furt sa tu s tým šmrdkáš, Tri dni sa tu jebeme a čas beží! A nedrž mi tú karbobrúsku pri uchu, Celý život ťa mám vodiť za ruku?! Zatlačil jak Rambo, kotúč letí stavbou A vedúceho trafil rovno do krku. Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem!\n', '2024-12-07 19:56:23', NULL),
+(8, 'Emanuel Bacigala', 5, 'https://preview.redd.it/in-the-animated-movie-up-kevin-a-flightless-bird-changes-v0-lw0jq9kia6791.jpg?auto=webp&s=ae902419b8dfa92261c368bfd1eb25d68054f24d', 'Emanuel Bacigala z Popradu Vyfasoval karbobrúsku zo skladu. Tú starú Boshku karbošku poškodenú trošku, A poďho rezať zo železa ohradu. Už si dneska minul štyri kotúče, Čo s tým robíš, Bacigala, do púče?! A včera flexku Narexku, ná kdes to videl, v Tescu? Však vedúci ťa s vodováhou utlče! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Vysvetlujte zdrogovanej mládeži, Že sa im nenačíta brúsny kotúč na veži. Sa tu s tým prdkáš a trtkáš, furt sa tu s tým šmrdkáš, Tri dni sa tu jebeme a čas beží! A nedrž mi tú karbobrúsku pri uchu, Celý život ťa mám vodiť za ruku?! Zatlačil jak Rambo, kotúč letí stavbou A vedúceho trafil rovno do krku. Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem. Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem! Ja toho Bacigalu zabijem!\n', '2024-12-02 19:56:23', NULL),
 (9, 'Sluka', 6, 'https://images.twinkl.co.uk/tw1n/image/private/t_630/u/ux/prime-numbers-wiki_ver_1.png', 'sluka sluka sluka na sluka', '2023-12-07 19:56:23', '2024-11-27 12:33:56'),
 (10, 'Margarita', 7, 'https://www.semienkozivota.sk/wp-content/uploads/2021/01/Margaretka-biela.jpg', 'Pojdes mi srdcko moje', '2024-11-27 12:35:28', '2024-11-27 12:35:24'),
-(11, 'Semienko', 3, 'https://mojekvety.sk/wp-content/uploads/2022/03/margaretka_letna_ruzova_svetla_2.jpg', 'Semienko zasialo mudrost zivota', '2024-05-28 18:12:15', NULL);
+(11, 'Semienko', 3, 'https://mojekvety.sk/wp-content/uploads/2022/03/margaretka_letna_ruzova_svetla_2.jpg', 'Semienko zasialo mudrost zivota', '2024-05-28 18:12:15', NULL),
+(14, 'Meliškov brat', 6, 'https://www.zoobratislava.sk/assets/Uploads/Lexikon/Cicavce/Lama-krotka/03_TH70493__ScaleMaxWidthWzEyMDBd.jpg', 'Je to veľký frajer', '2024-12-03 19:39:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -135,7 +136,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `genre`

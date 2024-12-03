@@ -10,7 +10,7 @@ class ApiMiddleware
 {
     public function handle(Request $request, \Closure $next)
     {
-        $token = $request->headers->get(Constants::AUTH_NAME) ?? null;
+        $token = $request->cookies->get(Constants::AUTH_NAME) ?? null;
         /** @type AuthService $service */
         $service = app(AuthService::class);
 

@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use Closure;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService
@@ -16,6 +14,7 @@ class AuthService
 
     public function __construct()
     {
+        /** @noinspection SpellCheckingInspection */
         $this->key = env('JWT_SECRET', env('APP_KEY', 'U8grDuf4DPnRlWK6xIr7qRi7pzeya0Tj-GFOZft7EBI'));
     }
 
@@ -36,7 +35,7 @@ class AuthService
 
     function validateToken(string $token, &$data = null): bool
     {
-        //$token = $this->parseTokenBearer($token);
+        $token = $this->parseTokenBearer($token);
         try {
             $data = JWT::decode($token, new Key(
                 keyMaterial: $this->key,
@@ -48,11 +47,6 @@ class AuthService
         return true;
     }
 
-    private function parseTokenBearer(string $rawToken): string
-    {
-        return substr($rawToken, strlen('Bearer '));
-    }
-
     function createPassword(string $password): string
     {
         return Hash::make(value: $password);
@@ -61,6 +55,15 @@ class AuthService
     function validatePassword(string $password, string $hashedPassword): bool
     {
         return Hash::check(value: $password, hashedValue: $hashedPassword);
+    }
+
+    private function parseTokenBearer(string $rawToken): string
+    {
+        $needle = 'Bearer ';
+        if (str_contains($rawToken, $needle)) {
+            return substr($rawToken, strlen($needle));
+        }
+        return $rawToken;
     }
 
 

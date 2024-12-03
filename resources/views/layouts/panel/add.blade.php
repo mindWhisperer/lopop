@@ -5,7 +5,7 @@
 @section('content')
     <main>
         <div class="riadok formular  cal-12">
-            <form class="row g-3">
+            <form class="row g-3" id="create">
                 <div class="col-md-12">
                     <h4>Pridať novú knihu</h4>
                     @include('partials.forms.add_edit')

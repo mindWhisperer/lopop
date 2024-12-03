@@ -3,20 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Constants;
-use App\Providers\AuthService;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserAuthController
 {
-
-    private AuthService $authService;
-
-    public function __construct()
-    {
-        $this->authService = app(AuthService::class);
-    }
-
     function login(Request $request)
     {
         $prev = $request->headers->get('referer');

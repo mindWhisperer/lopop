@@ -46,4 +46,9 @@ class BookServiceProvider
         return $this->table->orderBy('created_at', 'desc')->take(3)->get();
     }
 
+    public function getNewest()
+    {
+        return $this->table->orderBy('created_at', 'desc')->first();
+    }
+
 }

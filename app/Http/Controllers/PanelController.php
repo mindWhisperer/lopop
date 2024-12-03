@@ -7,9 +7,8 @@ use App\Providers\GenreServiceProvider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
-use Symfony\Component\HttpFoundation\Request;
 
-class PanelController
+readonly class PanelController
 {
     private BookServiceProvider $bookService;
     private GenreServiceProvider $genreService;
@@ -20,25 +19,25 @@ class PanelController
         $this->genreService = new GenreServiceProvider();
     }
 
-    public function panel(Request $request): View|Factory|Application
+    public function panel(): View|Factory|Application
     {
         return view('layouts.panel.panel');
     }
 
-    public function addBook(Request $request): View|Factory|Application
+    public function addBook(): View|Factory|Application
     {
         $genreList = $this->genreService->readAll();
         return view('layouts.panel.add', ['genreList' => $genreList]);
     }
 
-    public function editBook(Request $request, int $id): View|Factory|Application
+    public function editBook(int $id): View|Factory|Application
     {
         $genreList = $this->genreService->readAll();
         $book = $this->bookService->read($id);
         return view('layouts.panel.edit', ['genreList' => $genreList, 'book' => $book]);
     }
 
-    public function profile(Request $request): View|Factory|Application
+    public function profile(): View|Factory|Application
     {
         return view('layouts.panel.profile');
     }

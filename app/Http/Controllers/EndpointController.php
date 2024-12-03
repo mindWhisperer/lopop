@@ -8,10 +8,10 @@ use App\Providers\BookServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 
-class EndpointController
+readonly class EndpointController
 {
-    private readonly BookServiceProvider $bookProvider;
-    private readonly \Illuminate\Database\Query\Builder $table;
+    private BookServiceProvider $bookProvider;
+    private \Illuminate\Database\Query\Builder $table;
 
     public function __construct()
     {
@@ -36,9 +36,19 @@ class EndpointController
      */
     public function create(Request $request): array
     {
-        return $request->get('data');
-        //$success = $this->bookProvider->create(data: $data);
-        //return [$success];
+        //return $request->get('data');
+
+        $data = $request->get('data');
+        $success = $this->bookProvider->create(data: $data);
+        $newestRecord = $this->bookProvider->getNewest();
+        return [
+            "code" => 200,
+            "message" => "Book was created",
+            "success" => $success,
+            "data" => [
+                "id" => $newestRecord->id,
+            ],
+        ];
     }
 
     /**
@@ -49,9 +59,13 @@ class EndpointController
      */
     public function update(Request $request, string $id): array
     {
-        $data = json_decode($request->get('data'));
+        $data = $request->get('data');
         $success = $this->bookProvider->update(id: $id, data: $data);
-        return [$success];
+        return [
+            "code" => 200,
+            "message" => "Book was updated",
+            "success" => $success,
+        ];
     }
 
     /**
@@ -62,7 +76,11 @@ class EndpointController
     public function delete(string $id): array
     {
         $success = $this->bookProvider->delete(id: $id);
-        return [$success];
+        return [
+            "code" => 200,
+            "message" => "Book was deleted",
+            "success" => $success,
+        ];
     }
 
     public function register(string $email, string $password): array

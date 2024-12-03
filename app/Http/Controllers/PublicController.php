@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 
-class PublicController
+readonly class PublicController
 {
 
     private BookServiceProvider $bookService;

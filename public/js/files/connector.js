@@ -20,22 +20,19 @@ export class Fetch {
         return this.#fetch(endpoint, data, "POST");
     }
 
-    static options(endpoint, data) {
-        return this.#fetch(endpoint, data, "OPTIONS");
+    static options(endpoint) {
+        return this.#fetch(endpoint, null, "OPTIONS");
     }
 
     static put(endpoint, data) {
         return this.#fetch(endpoint, data, "PUT");
     }
 
-    static delete(endpoint, data) {
-        return this.#fetch(endpoint, data, "DELETE");
+    static delete(endpoint) {
+        return this.#fetch(endpoint, null, "DELETE");
     }
 
     static async #fetch(url, data = null, method = "GET") {
-
-        if (!url?.trim?.())
-            throw new Error('url must be provided');
 
         const headers = {
             "Content-Type": "application/json",
