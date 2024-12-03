@@ -160,17 +160,35 @@ footer {
 }
 
 /*breakpoint pri maximalnej velkosti displeju 992px*/
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .riadok {
         flex-direction: column;
     }
 
     .card {
-        width: auto;
+        width: 100%;
+    }
+
+    .btn {
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+
+    .rad {
+        margin: 2rem;
+        align-content: center;
     }
 
 }
 
+/*breakpoint pri maximalnej velkosti displeju 992px*/
+@media (max-width: 768px) {
+    .row {
+        --bs-gutter-x: 2.5rem;
+        --bs-gutter-y: 2rem;
+    }
+
+}
 
 .main-grid {
     display: flex;
